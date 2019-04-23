@@ -1,0 +1,26 @@
+#locations {
+  display: flex;
+  -webkit-flex-flow: row wrap;
+}
+
+.locations-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  width: 16%;
+  height: 500px;
+  border: 1px solid black;
+  background-color:#F5F5F5;
+  text-align: center;
+}
+
+.img {
+  width: 200px;
+  height: 200px;
+  justify-content: center;
+}
+
+.locations-name {
+  border: black;
+}
