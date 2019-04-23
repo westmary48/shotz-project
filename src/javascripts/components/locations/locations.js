@@ -26,9 +26,9 @@ const shootTimeClass = (shootTime) => {
   return selectedClass;
 };
 
-const domStringBuilderLocations = () => {
+const domStringBuilderLocations = (locArray) => {
   let domString = '';
-  locations.forEach((location) => {
+  locArray.forEach((location) => {
     domString += `<div id = ${location.id} class ="locations-card" col- 2">`;
     domString += `<h3 class ="card-header ${shootTimeClass(location.shootTime)}">${location.name}</h3>`;
     domString += '<div class="card-body">';
@@ -41,12 +41,41 @@ const domStringBuilderLocations = () => {
   util.printToDom('locations', domString);
 };
 
+const filterButtonEvent = (e) => {
+  const buttonId = e.target.id;
+  const darkLocations = locations.filter(x => x.shootTime === 'After Dark');
+  const morningLocations = locations.filter(x => x.shootTime === 'Morning');
+  const afternoonLocations = locations.filter(x => x.shootTime === 'Afternoon');
+  const eveningLocations = locations.filter(x => x.shootTime === 'Evening');
+  switch (buttonId) {
+    case 'morning':
+      domStringBuilderLocations(morningLocations);
+      break;
+    case 'afternoon':
+      domStringBuilderLocations(afternoonLocations);
+      break;
+    case 'evening':
+      domStringBuilderLocations(eveningLocations);
+      break;
+    case 'dark':
+      domStringBuilderLocations(darkLocations);
+      break;
+    default:
+      domStringBuilderLocations(locations);
+  }
+};
+
 const initializeLocations = () => {
   locationsData.getLocationsData()
     .then((response) => {
       const locationResults = response.data.locations;
       locations = locationResults;
-      domStringBuilderLocations();
+      domStringBuilderLocations(locations);
+      document.getElementById('dark').addEventListener('click', filterButtonEvent);
+      document.getElementById('afternoon').addEventListener('click', filterButtonEvent);
+      document.getElementById('evening').addEventListener('click', filterButtonEvent);
+      document.getElementById('morning').addEventListener('click', filterButtonEvent);
+      document.getElementById('all').addEventListener('click', filterButtonEvent);
     })
     .catch(err => console.error(err));
 };
