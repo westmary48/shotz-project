@@ -9,13 +9,12 @@ const domStringBuilder = () => {
   let domString = '';
   movies.forEach((movie) => {
     domString += `<div id = ${movie.id} class ="movie-card col- 3">`;
-    domString += `<h3 class "card-header">${movie.name}</h3>`;
-    domString += '</div>';
+    domString += `<h3 class= "card-header">${movie.name}</h3>`;
     domString += '<div class="card-body">';
     domString += `<h3>${movie.genre}</h3>`;
     domString += `<h3>${movie.releaseDate}</h3>`;
     domString += `<h3>${movie.description}</h3>`;
-    domString += `<p>${movie.locations.length}</p>`;
+    domString += `<p>${movie.locations.length} Locations </p>`;
     domString += '</div>';
     domString += '</div>';
   });
