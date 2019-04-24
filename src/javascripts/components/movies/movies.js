@@ -22,6 +22,13 @@ const domStringBuilder = (moviesArray) => {
   util.printToDom('movies', domString);
 };
 
+const removeDummy = () => {
+  const filter = document.getElementById('filters');
+  filter.parentNode.removeChild(filter);
+  const loc = document.getElementById('locations');
+  loc.parentNode.removeChild(loc);
+ }
+
 const filterButtonEventMovies = (e) => {
   const buttonId = e.target.id;
   const movieOne = movies.filter(x => x.id === 'movie1');
@@ -31,15 +38,19 @@ const filterButtonEventMovies = (e) => {
   switch (buttonId) {
     case 'movie1':
     domStringBuilder(movieOne);
+    removeDummy();
       break;
     case 'movie2':
     domStringBuilder(movieTwo);
+    removeDummy();
       break;
     case 'movie3':
     domStringBuilder(movieThree);
+    removeDummy();
       break;
     case 'movie4':
     domStringBuilder(movieFour);
+    removeDummy();
       break;
     default:
     domStringBuilder(movieOne);
