@@ -9,6 +9,7 @@ const domStringBuilder = (moviesArray) => {
   let domString = '';
   moviesArray.forEach((movie) => {
     domString += `<div class ="movie-card col- 3">`;
+    domString += '<input type="button" value="Back" onClick="location.href=location.href"></button>';
     domString += `<h3 class= "card-header">${movie.name}</h3>`;
     domString += '<div class="card-body">';
     domString += `<h3>${movie.genre}</h3>`;
