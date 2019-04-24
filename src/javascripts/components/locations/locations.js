@@ -66,11 +66,11 @@ const filterButtonEvent = (e) => {
 };
 
 const filterByTextEvent = (e) => {
-const searchText = e.target.value;
-const searchLocations = locations.filter((x) => {
-  const hasName = x.name.includes(searchText);
-  const hasAddress = x.address.includes(searchText);
-  return hasName || hasAddress;
+  const searchText = e.target.value;
+      const searchLocations = locations.filter((x) => {
+      const hasName = x.name.includes(searchText);
+      const hasAddress = x.address.includes(searchText);
+      return hasName || hasAddress;
 });
 domStringBuilderLocations(searchLocations);
 };
