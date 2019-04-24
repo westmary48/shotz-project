@@ -27,6 +27,8 @@ const removeDummy = () => {
   filter.parentNode.removeChild(filter);
   const loc = document.getElementById('locations');
   loc.parentNode.removeChild(loc);
+  const h = document.getElementById('locations-h');
+  h.parentNode.removeChild(h);
  }
 
 const filterButtonEventMovies = (e) => {
