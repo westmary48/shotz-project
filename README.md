@@ -2,7 +2,13 @@
 
 ## Description
 
+This project  was our first project using the webpack. We had to be familiar with javascript, webpack, and modules to complete this project.
+
 ## Screenshots
+
+![Shotz](https://raw.githubusercontent.com/westmary48/shotz-project/master/images/frontPage.png)
+
+ ![Shotz](https://raw.githubusercontent.com/westmary48/shotz-project/master/images/secondPage.png)
 
 ## Installation Instructions
 * Clone down this repo
