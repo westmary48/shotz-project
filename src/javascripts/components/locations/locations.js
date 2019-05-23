@@ -41,29 +41,25 @@ const domStringBuilderLocations = (locArray) => {
   util.printToDom('locations', domString);
 };
 
-const filterButtonEvent = (e) => {
+const sort = (e) => {
   const buttonId = e.target.id;
-  const darkLocations = locations.filter(x => x.shootTime === 'After Dark');
-  const morningLocations = locations.filter(x => x.shootTime === 'Morning');
-  const afternoonLocations = locations.filter(x => x.shootTime === 'Afternoon');
-  const eveningLocations = locations.filter(x => x.shootTime === 'Evening');
-  switch (buttonId) {
-    case 'morning':
-      domStringBuilderLocations(morningLocations);
-      break;
-    case 'afternoon':
-      domStringBuilderLocations(afternoonLocations);
-      break;
-    case 'evening':
-      domStringBuilderLocations(eveningLocations);
-      break;
-    case 'dark':
-      domStringBuilderLocations(darkLocations);
-      break;
-    default:
-      domStringBuilderLocations(locations);
-  }
+  let filterArray = [];
+  locations.forEach((location) => {
+    if (location.shootTime === 'After Dark' && buttonId === 'dark') {
+      filterArray.push(location);
+    } else if (location.shootTime === 'Morning' && buttonId === 'morning') {
+      filterArray.push(location);
+    } else if (location.shootTime === 'Evening' && buttonId === 'evening') {
+      filterArray.push(location);
+    } else if (location.shootTime === 'Afternoon' && buttonId === 'afternoon') {
+      filterArray.push(location);
+    } else if (buttonId === 'all') {
+      filterArray = locations;
+    }
+    domStringBuilderLocations(filterArray);
+  });
 };
+
 
 const filterByTextEvent = (e) => {
   const searchText = e.target.value;
@@ -81,11 +77,11 @@ const initializeLocations = () => {
       const locationResults = response.data.locations;
       locations = locationResults;
       domStringBuilderLocations(locations);
-      document.getElementById('dark').addEventListener('click', filterButtonEvent);
-      document.getElementById('afternoon').addEventListener('click', filterButtonEvent);
-      document.getElementById('evening').addEventListener('click', filterButtonEvent);
-      document.getElementById('morning').addEventListener('click', filterButtonEvent);
-      document.getElementById('all').addEventListener('click', filterButtonEvent);
+      document.getElementById('dark').addEventListener('click', sort);
+      document.getElementById('afternoon').addEventListener('click', sort);
+      document.getElementById('evening').addEventListener('click', sort);
+      document.getElementById('morning').addEventListener('click', sort);
+      document.getElementById('all').addEventListener('click', sort);
       document.getElementById('search-input').addEventListener('keyup', filterByTextEvent);
     })
     .catch(err => console.error(err));
