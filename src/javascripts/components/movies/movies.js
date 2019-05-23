@@ -1,5 +1,6 @@
 import moviesData from '../../helpers/data/moviesData';
 import util from '../../helpers/util';
+import locationMovies from '../locationMovies/locationMovies';
 
 import './movies.scss';
 
@@ -8,8 +9,7 @@ let movies = [];
 const domStringBuilder = (moviesArray) => {
   let domString = '';
   moviesArray.forEach((movie) => {
-    domString += `<div class ="movie-card col- 3">`;
-    domString += '<input type="button" value="Back" onClick="location.href=location.href"></button>';
+    domString += '<div class ="movie-card col- 3">';
     domString += `<h3 class= "card-header">${movie.name}</h3>`;
     domString += '<div class="card-body">';
     domString += `<h3>${movie.genre}</h3>`;
@@ -23,42 +23,42 @@ const domStringBuilder = (moviesArray) => {
   util.printToDom('movies', domString);
 };
 
-const removeDummy = () => {
-  const filter = document.getElementById('filters');
-  filter.parentNode.removeChild(filter);
-  const loc = document.getElementById('locations');
-  loc.parentNode.removeChild(loc);
-  const h = document.getElementById('locations-h');
-  h.parentNode.removeChild(h);
- }
+// const removeDummy = () => {
+//   const filter = document.getElementById('filters');
+//   filter.parentNode.removeChild(filter);
+//   const loc = document.getElementById('locations');
+//   loc.parentNode.removeChild(loc);
+//   const h = document.getElementById('locations-h');
+//   h.parentNode.removeChild(h);
+// };
 
-const filterButtonEventMovies = (e) => {
-  const buttonId = e.target.id;
-  const movieOne = movies.filter(x => x.id === 'movie1');
-  const movieTwo = movies.filter(x => x.id === 'movie2');
-  const movieThree = movies.filter(x => x.id === 'movie3');
-  const movieFour =  movies.filter(x => x.id === 'movie4');
-  switch (buttonId) {
-    case 'movie1':
-    domStringBuilder(movieOne);
-    removeDummy();
-      break;
-    case 'movie2':
-    domStringBuilder(movieTwo);
-    removeDummy();
-      break;
-    case 'movie3':
-    domStringBuilder(movieThree);
-    removeDummy();
-      break;
-    case 'movie4':
-    domStringBuilder(movieFour);
-    removeDummy();
-      break;
-    default:
-    domStringBuilder(movieOne);
-  }
-};
+// const filterButtonEventMovies = (e) => {
+//   const buttonId = e.target.id;
+//   const movieOne = movies.filter(x => x.id === 'movie1');
+//   const movieTwo = movies.filter(x => x.id === 'movie2');
+//   const movieThree = movies.filter(x => x.id === 'movie3');
+//   const movieFour = movies.filter(x => x.id === 'movie4');
+//   switch (buttonId) {
+//     case 'movie1':
+//       domStringBuilder(movieOne);
+//       // removeDummy();
+//       break;
+//     case 'movie2':
+//       domStringBuilder(movieTwo);
+//       // removeDummy();
+//       break;
+//     case 'movie3':
+//       domStringBuilder(movieThree);
+//       // removeDummy();
+//       break;
+//     case 'movie4':
+//       domStringBuilder(movieFour);
+//       // removeDummy();
+//       break;
+//     default:
+//       domStringBuilder(movieOne);
+//   }
+// };
 
 const initializeMovies = () => {
   moviesData.getMoviesData()
@@ -66,10 +66,7 @@ const initializeMovies = () => {
       const movieResults = response.data.movies;
       movies = movieResults;
       domStringBuilder(movies);
-      document.getElementById('movie1').addEventListener('click', filterButtonEventMovies);
-      document.getElementById('movie2').addEventListener('click', filterButtonEventMovies);
-      document.getElementById('movie3').addEventListener('click', filterButtonEventMovies);
-      document.getElementById('movie4').addEventListener('click', filterButtonEventMovies);
+      locationMovies.movieEvents();
     })
     .catch(err => console.error(err));
 };
